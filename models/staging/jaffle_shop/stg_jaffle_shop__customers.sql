@@ -2,22 +2,25 @@
 --     id as customer_id,
 --     first_name,
 --     last_name
-
 -- from {{source ('jaffle_shop', 'customers') }}
-
-with
-
-source as (
-    
-    select * from  {{source ('jaffle_shop', 'customers') }}
+WITH source AS (
+    SELECT
+        *
+    FROM
+        {{ source (
+            'jaffle_shop',
+            'customers'
+        ) }}
 ),
-
-transformed as (
-
-    select id as customer_id,
-    first_name,
-    LAST_NAME
-    from source
+transformed AS (
+    SELECT
+        id AS customer_id,
+        first_name,
+        last_name
+    FROM
+        source
 )
-
-select * from transformed
+SELECT
+    *
+FROM
+    transformed
